@@ -11,7 +11,7 @@ namespace HPlusSports.Core
         {
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<ISalesPersonService, SalesPersonService>();
-
+            services.AddTransient<INotifyService, EmailNotifyService>();
         }
     }
 }

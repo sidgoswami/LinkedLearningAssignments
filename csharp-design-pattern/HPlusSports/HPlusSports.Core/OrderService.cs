@@ -12,11 +12,13 @@ namespace HPlusSports.Core
     {
         IOrderRepository _orderRepo;
         HPlusSportsContext _context;
+        INotifyService _notifyService;
 
-        public OrderService(IOrderRepository orderRepo, HPlusSportsContext context)
+        public OrderService(IOrderRepository orderRepo, HPlusSportsContext context, INotifyService notifyService)
         {
             _orderRepo = orderRepo;
             _context = context;
+            _notifyService = notifyService;
         }
 
         public async Task<IList<Order>> GetCustomerOrders(int CustomerId)
@@ -55,6 +57,7 @@ namespace HPlusSports.Core
             });
 
             await _context.SaveChangesAsync();
+            _notifyService.NotifyUser(customerId);
             return order;
         }
 
